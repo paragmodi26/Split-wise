@@ -26,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Clone the repository
 
     ```bash
-    git clone https://github.com/
+    git clone https://github.com/paragmodi26/Split-wise.git
     ```
 
 - Create and setup the virtual env for [python](https://docs.python.org/3/library/venv.html).
