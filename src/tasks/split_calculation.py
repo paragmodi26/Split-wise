@@ -57,7 +57,6 @@ async def split_amount_task(_id: int):
                         group_meta_data["pay"] = {payed_user_id: amount}
 
                     elif "pay" in group_meta_data and group_meta_data["pay"]:
-                        # check this logic once
                         if payed_user_id not in group_meta_data["pay"]:
                             if payed_user_id in group_meta_data.get("take", {}):
                                 take_amount = group_meta_data.get("take", {}).get(payed_user_id)
@@ -144,14 +143,14 @@ async def _split_amount_weekly_task():
                     for key2, value2 in value1.items():
                         user_data = UserModel.get_user(_id=key2)
                         if key1 == "pay":
-                            pay_body += f"{value2} to {user_data.name},"
+                            pay_body += f" {value2}/- to {user_data.name},"
                         if key1 == "take":
-                            take_body += f"{value2} from {user_data.name},"
-                    pay_body += f"for group {group_data.name}"
-                    take_body += f"for group {group_data.name}"
+                            take_body += f" {value2}/- from {user_data.name},"
+                    pay_body += f"for group {group_data.group_name}"
+                    take_body += f"for group {group_data.group_name}"
                 pay_body += f"<br>"
                 take_body += f"<br>"
-            body = f"{pay_body} + <br><br> {take_body}"
+            body = f" {pay_body} <br><br> {take_body}"
             body = SplitBillNotificationTemplate.body.format(dynamic_body=body)
             email_payload = {
                 "to_addrs": [user.email],
